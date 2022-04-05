@@ -33,7 +33,7 @@ Guidelines for bug reports:
    reported.
 
 2. **Check if the issue has been fixed** &mdash; try to reproduce it using the
-   latest `master` or development branch in the repository.
+   latest `main` or development branch in the repository.
 
 3. **Isolate the problem** &mdash; make sure that the code in the repository is
    _definitely_ responsible for the issue.

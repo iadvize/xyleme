@@ -1,4 +1,5 @@
-import Dependencies._
+val scala212 = "2.12.15"
+val scala213 = "2.13.8"
 
 inThisBuild(
   List(
@@ -13,11 +14,17 @@ inThisBuild(
         url("https://github.com/xela85")
       )
     ),
-    scalaVersion := "2.13.8"
+    scalaVersion := scala212,
+    crossScalaVersions := List(scala212, scala213),
+    scalacOptions += "-Ypartial-unification"
   )
 )
 
-lazy val root = (project in file("modules/core")).settings(
+lazy val core = (project in file("modules/core")).settings(
   name := "xyleme",
-  libraryDependencies += scalaTest % Test
+  libraryDependencies ++= List(
+    Dependencies.scalaXml,
+    Dependencies.catsCore,
+    Dependencies.scalaTest % Test
+  )
 )
