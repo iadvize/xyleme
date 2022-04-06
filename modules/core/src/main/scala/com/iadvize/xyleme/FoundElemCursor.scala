@@ -45,6 +45,8 @@ private[xyleme] final case class FoundElemCursor(
 
   override def text: TextCursor = leadTo(Some(elem.text), DownText)
 
+  override def isFailed: Boolean = false
+
   private def fail(op: XmlOperation): FailedCursor = FailedCursor(history :+ op)
 
   private def leadTo(maybeText: Option[String], operation: XmlOperation) =

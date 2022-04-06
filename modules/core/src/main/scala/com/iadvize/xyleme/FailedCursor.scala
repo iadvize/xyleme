@@ -20,5 +20,7 @@ private[xyleme] final case class FailedCursor(history: Vector[XmlOperation]) ext
 
   override def text: TextCursor = MissingTextCursor(history :+ DownText)
 
+  override def isFailed: Boolean = true
+
   private def appendToHistory(operation: XmlOperation) = FailedCursor(history :+ operation)
 }

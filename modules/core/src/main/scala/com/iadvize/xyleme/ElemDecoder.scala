@@ -1,7 +1,6 @@
 package com.iadvize.xyleme
 
-import cats.data.{ Validated, ValidatedNec, ValidatedNel }
-import cats.syntax.either._
+import cats.data.{ Validated, ValidatedNec }
 import cats.syntax.traverse._
 
 sealed trait ElemDecoder[A] {
@@ -46,9 +45,9 @@ object ElemDecoder {
     }
 
   implicit def decodeOption[A: ElemDecoder]: ElemDecoder[Option[A]] =
-    ElemDecoder.instance {
-      case cursor: FoundElemCursor => cursor.as[A].map(Some(_))
-      case _: FailedCursor         => Validated.Valid(None)
+    ElemDecoder.instance { cursor =>
+      if (cursor.isFailed) Validated.Valid(None)
+      else cursor.as[A].map(Some(_))
     }
 
 }

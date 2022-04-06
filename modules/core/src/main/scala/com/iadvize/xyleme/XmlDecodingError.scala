@@ -28,6 +28,6 @@ object XmlDecodingError {
 
   sealed trait Kind
   case object FieldNotFound extends Kind
-  case class ParsingFailed(typeName: String, given: String, maybeThrowable: Option[Throwable]) extends Kind
+  case class ParsingFailed(typeName: String, text: String, maybeThrowable: Option[Throwable]) extends Kind
 
 }

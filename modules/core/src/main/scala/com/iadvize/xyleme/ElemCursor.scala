@@ -30,6 +30,8 @@ trait ElemCursor {
 
   def text: TextCursor
 
+  def isFailed: Boolean
+
   final def as[A: ElemDecoder]: AccumulatingResult[A] =
     ElemDecoder[A].decodeAccumulating(this)
 

@@ -16,7 +16,6 @@ inThisBuild(
     ),
     scalaVersion := scala212,
     crossScalaVersions := List(scala212, scala213),
-    scalacOptions += "-Ypartial-unification",
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release")))
