@@ -4,7 +4,7 @@ _A quick way to parse XML structures_
 [![codecov](https://codecov.io/gh/iadvize/xyleme/branch/main/graph/badge.svg?token=K6BM30SJX7)](https://codecov.io/gh/iadvize/xyleme)
 
 
-### Motivation
+## Motivation
 
 Xyleme comes from the frustration of having to quickly parse XML elements. 
 In my experience, two well-known libraries enable to parse XML in Scala : 
@@ -13,7 +13,7 @@ In my experience, two well-known libraries enable to parse XML in Scala :
 
 The idea of Xyleme is to use [circe](https://github.com/circe/circe) as inspiration to enable safer and easier parsing of xml elements.
 
-### Getting started
+## Getting started
 
 First, add Xyleme dependency to your module definition in `build.sbt`
 ```sbt
@@ -86,7 +86,7 @@ println(wrongAlbums)
 // ))
 ```
 
-### Current state
+## Contribute
 
 Xyleme is currently in development : 
 - its API is not stable and could change
@@ -96,3 +96,5 @@ Xyleme is currently in development :
 Feel free to contribute :). I already think of several improvements: 
 - a stax cursor implementation, quite complex, but I think it could be possible
 - add property based tests to improve coverage of edge cases
+
+Contribution guidelines are described in [CONTRIBUTING.md](CONTRIBUTING.md).
