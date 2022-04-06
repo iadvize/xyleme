@@ -42,6 +42,20 @@ inThisBuild(
         )
       )
     ),
+    githubWorkflowAddedJobs ++= Seq(
+      WorkflowJob(
+        "scalafmt",
+        "Scalafmt",
+        githubWorkflowJobSetup.value.toList ::: List(
+          WorkflowStep.Sbt(
+            List("scalafmtCheckAll", "scalafmtSbtCheck"),
+            name = Some("Scalafmt tests")
+          )
+        ),
+        scalas = crossScalaVersions.value.take(1).toList,
+        javas = List(JavaSpec.temurin("8"))
+      )
+    ),
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release")))
