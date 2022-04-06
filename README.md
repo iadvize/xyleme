@@ -1,6 +1,8 @@
 # Xyleme
 _A quick way to parse XML structures_
 
+[![codecov](https://codecov.io/gh/iadvize/xyleme/branch/main/graph/badge.svg?token=K6BM30SJX7)](https://codecov.io/gh/iadvize/xyleme)
+
 
 ### Motivation
 
