@@ -16,6 +16,32 @@ inThisBuild(
     ),
     scalaVersion := scala212,
     crossScalaVersions := List(scala212, scala213),
+    githubWorkflowBuild := Seq(
+      WorkflowStep.Sbt(
+        List(
+          "coverage",
+          "test"
+        ),
+        id = None,
+        name = Some("Test JVM (with coverage)")
+      ),
+      WorkflowStep.Sbt(
+        List("coverageReport"),
+        id = None,
+        name = Some("Coverage")
+      ),
+      WorkflowStep.Use(
+        UseRef.Public(
+          "codecov",
+          "codecov-action",
+          "v2"
+        ),
+        params = Map(
+          "flags" -> List("${{matrix.scala}}", "${{matrix.java}}").mkString(","),
+          "token" -> "${{ secrets.CODECOV_TOKEN }}"
+        )
+      )
+    ),
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release")))
