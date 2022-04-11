@@ -4,12 +4,12 @@ sealed trait XmlOperation
 
 object XmlOperation {
 
-  case class DownElem(name: String) extends XmlOperation
+  final case class DownElem(name: String) extends XmlOperation
   case object NextElem extends XmlOperation
-  case class DownAttribute(name: String) extends XmlOperation
+  final case class DownAttribute(name: String) extends XmlOperation
   case object DownText extends XmlOperation
 
-  private case class PathFoldingState(result: String, maybeIndex: Option[Int]) {
+  final private case class PathFoldingState(result: String, maybeIndex: Option[Int]) {
 
     def append(str: String): PathFoldingState = maybeIndex match {
       case Some(value) => copy(result + value + "]" + str, None)
