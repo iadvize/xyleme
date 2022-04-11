@@ -4,7 +4,7 @@ import cats.syntax.either._
 import ElemDecoder.AccumulatingResult
 import cats.syntax.traverse._
 
-case class FoundTextCursor(history: Vector[XmlOperation], text: String) extends TextCursor {
+final case class FoundTextCursor(history: Vector[XmlOperation], text: String) extends TextCursor {
 
   final def as[A: TextDecoder]: AccumulatingResult[A] =
     implicitly[TextDecoder[A]].decode(text).leftMap(XmlDecodingError(history, _)).toValidatedNec

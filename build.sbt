@@ -16,12 +16,11 @@ inThisBuild(
     ),
     scalaVersion := scala213,
     crossScalaVersions := List(scala212, scala213),
+    scalafixDependencies += "com.github.vovapolu" %% "scaluzzi" % "0.1.21",
+    scalafixScalaBinaryVersion := "2.13",
     githubWorkflowBuild := Seq(
       WorkflowStep.Sbt(
-        List(
-          "coverage",
-          "test"
-        ),
+        List("ci"),
         id = None,
         name = Some("Test JVM (with coverage)")
       ),
@@ -42,20 +41,6 @@ inThisBuild(
         )
       )
     ),
-    githubWorkflowAddedJobs ++= Seq(
-      WorkflowJob(
-        "scalafmt",
-        "Scalafmt",
-        githubWorkflowJobSetup.value.toList ::: List(
-          WorkflowStep.Sbt(
-            List("scalafmtCheckAll", "scalafmtSbtCheck"),
-            name = Some("Scalafmt tests")
-          )
-        ),
-        scalas = crossScalaVersions.value.take(1).toList,
-        javas = List(JavaSpec.temurin("8"))
-      )
-    ),
     githubWorkflowTargetTags ++= Seq("v*"),
     githubWorkflowPublishTargetBranches := Seq(RefPredicate.StartsWith(Ref.Tag("v"))),
     githubWorkflowPublish := Seq(WorkflowStep.Sbt(List("ci-release")))
@@ -68,5 +53,20 @@ lazy val core = (project in file("modules/core")).settings(
     Dependencies.scalaXml,
     Dependencies.catsCore,
     Dependencies.scalaTest % Test
+  )
+)
+
+def addCommandsAlias(name: String, values: List[String]) =
+  addCommandAlias(name, values.mkString(";", ";", ""))
+
+addCommandsAlias(
+  "ci",
+  List(
+    "scalafmtCheckAll",
+    "scalafmtSbtCheck",
+    "scalafixEnable",
+    "scalafix --check",
+    "coverageOn",
+    "test"
   )
 )
