@@ -14,7 +14,7 @@ inThisBuild(
         url("https://github.com/xela85")
       )
     ),
-    scalaVersion := scala212,
+    scalaVersion := scala213,
     crossScalaVersions := List(scala212, scala213),
     githubWorkflowBuild := Seq(
       WorkflowStep.Sbt(
