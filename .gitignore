@@ -3,4 +3,7 @@ target/
 project/target/
 projet/projet/target
 .idea/
-
+metals.sbt
+.vscode/
+.metals/
+.bloop/

@@ -16,7 +16,7 @@ inThisBuild(
     ),
     scalaVersion := scala213,
     crossScalaVersions := List(scala212, scala213),
-    scalafixDependencies += "com.github.vovapolu" %% "scaluzzi" % "0.1.21",
+    scalafixDependencies += "com.github.vovapolu" %% "scaluzzi" % "0.1.23",
     scalafixScalaBinaryVersion := "2.13",
     githubWorkflowBuild := Seq(
       WorkflowStep.Sbt(
@@ -53,7 +53,8 @@ lazy val core = (project in file("modules/core")).settings(
     Dependencies.scalaXml,
     Dependencies.catsCore,
     Dependencies.scalaTest % Test
-  )
+  ),
+  Test / scalacOptions -= "-Wnonunit-statement"
 )
 
 def addCommandsAlias(name: String, values: List[String]) =
